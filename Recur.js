@@ -36,12 +36,25 @@ export default class Recur extends React.Component {
 
 
 	render() {	
-		if (!this.state.data) { return null } 	
+		const _data = this.state.data;
+		if (!_data) { return null } 	
 
-		if ( !(Array.isArray(this.state.data)) ) { 
-			return this._renderChild(this.state.data) 
+		if ( !(Array.isArray(_data)) ) { 
+			return this._renderChild(_data) 
 		} else { 
-			return this.state.data.map((data) => this._renderChild(data)) 
+			return _data.map((data) => this._renderChild(data)) 
 		}
+		/*
+		or better:
+		
+		const _data = this.state.data;
+		if (!_data) { return null } 	
+
+		return Array.isArray(_data) ? this._renderChild(_data) : _data.map(data => this._renderChild(data))
+		
+		or 
+		
+		return [Array.isArray(_data) ? _data : [_data]].map(data => this._renderChild(data))
+		*/
 	}
 }
